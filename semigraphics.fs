@@ -6,15 +6,12 @@
 
 decimal
 
-: page ( -- ) \ Needs to redefine because of current version of Microsoft Windows [Version 10.0.17083.1000].
-  0 0 at-xy ESC[ ." J" ;
-
 ( To print answer: DECXCPR type )
 : DECXCPR ( -- addr count )
   \ BEGIN  stdin key?-file
   \ WHILE  stdin key-file drop
   \ REPEAT
-  ESC[ ." 6n"
+  .\" \e[6n"
   9 0 DO
   stdin key-file dup 
   pad i + c!
@@ -234,40 +231,40 @@ _rows @ _cols @ * string screen
   swap dot ;
   
 \ Described in http://www.abc80.net/archive/luxor/ABC80x/ABC806-dator-manual-BASIC-II.pdf .
-: BLK ESC[ ." 22;30m" ;
-: RED ESC[ ." 1;31m" ;
-: GRN ESC[ ." 22;32m" ;
-: YEL ESC[ ." 22;33m" ;
-: BLU ESC[ ." 22;34m" ;
-: MAG ESC[ ." 22;35m" ;
-: CYA ESC[ ." 22;36m" ;
-: WHT ESC[ ." 22;37m" ;
-: BLK-NWBG ESC[ ." 40m" ;
+: BLK .\" \e[22;30m" ;
+: RED .\" \e[1;31m" ;
+: GRN .\" \e[22;32m" ;
+: YEL .\" \e[22;33m" ;
+: BLU .\" \e[22;34m" ;
+: MAG .\" \e[22;35m" ;
+: CYA .\" \e[22;36m" ;
+: WHT .\" \e[22;37m" ;
+: BLK-NWBG .\" \e[40m" ;
 : BLBG BLK-NWBG ;
-: RED-NWBG ESC[ ." 101m" ;
-: GRN-NWBG ESC[ ." 102m" ;
-: YEL-NWBG ESC[ ." 103m" ;
-: BLU-NWBG ESC[ ." 104m" ;
-: MAG-NWBG ESC[ ." 105m" ;
-: CYA-NWBG ESC[ ." 106m" ;
-: WHT-NWBG ESC[ ." 107m" ;
-: ULN ESC[ ." 4m" ;
-: NULN ESC[ ." 24m" ;
-: FLSH ESC[ ." 5m" ;
-: STDY ESC[ ." 25m" ;
+: RED-NWBG .\" \e[101m" ;
+: GRN-NWBG .\" \e[102m" ;
+: YEL-NWBG .\" \e[103m" ;
+: BLU-NWBG .\" \e[104m" ;
+: MAG-NWBG .\" \e[105m" ;
+: CYA-NWBG .\" \e[106m" ;
+: WHT-NWBG .\" \e[107m" ;
+: ULN .\" \e[4m" ;
+: NULN .\" \e[24m" ;
+: FLSH .\" \e[5m" ;
+: STDY .\" \e[25m" ;
 : EL .\" \e#6" ;
 : DBLET .\" \e#3" ;
 : DBLEB .\" \e#4" ;
 : NRML .\" \e#5" ;
 \ GCON GSEP
 \ Not in BASIC II
-: DFLT ESC[ ." 0m" ;
-: FLSH-CUR ESC[ ." ?12h" ;
-: STDY-CUR ESC[ ." ?12l" ;
-: SHOW-CUR ESC[ ." ?25h" ;
-: HIDE-CUR ESC[ ." ?25l" ;
-: CUU ESC[ [char] A emit ;
-: CUD ESC[ [char] B emit ;
+: DFLT .\" \e[0m" ;
+: FLSH-CUR .\" \e[?12h" ;
+: STDY-CUR .\" \e[?12l" ;
+: SHOW-CUR .\" \e[?25h" ;
+: HIDE-CUR .\" \e[?25l" ;
+: CUU 27 emit 91 emit [char] A emit ;
+: CUD 27 emit 91 emit [char] B emit ;
 : SAVE-CUR .\" \e7" ;
 : RSTR-CUR .\" \e8" ;
 
